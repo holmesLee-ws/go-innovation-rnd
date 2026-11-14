@@ -18,7 +18,7 @@
 ## 재개 (`learner/state.json`이 있을 때)
 
 1. `state.json`과 `log.md`를 Read로 읽는다(`cat`·`tail` 금지).
-2. 지난번 어디까지 했는지 한 줄로 말한다. `current.pending_probe`에 답하지 않은 탐침이 있으면 복습보다 먼저 그것을 다시 낸다.
+2. 지난번 어디까지 했는지 한 줄로 말한다. `current.pending_probe`에 답하지 않은 탐침이 있으면 복습보다 먼저 그것을 다시 낸다. 그 탐침이나 지난 기록에 법적 구조가 들어 있으면 말하기 전에 원문을 다시 연다(새 세션이기 때문이다).
 3. `review_at`이 지난 모듈이 있으면 가장 오래된 것에서 복습 질문을 하나 낸다. 없으면 바로 이어간다.
 4. 학습자가 이어갈지 다른 것을 할지 고르게 한다.
 
@@ -51,6 +51,7 @@
 
 - 모듈이 끝날 때, 페이스 판단이 바뀔 때, 세션을 마칠 때 `state.json`을 **그 차례 안에** 고친다. 나중으로 미루지 않는다.
 - 오답이나 힌트 의존이 나오면 그 차례에 `gaps`에 적고 페이스 표에 따라 `pace`를 고친다. 예측이 일부만 틀린 경우도 오답이다.
+- 모듈을 시작하는 차례에 `log.md`에 한 줄 더한다. 보강(빈틈)을 시작하면 그 모듈의 `status`를 `in_progress`로, `current.path`를 `gap`으로 적는다.
 - 모듈을 시작하면 `current.module`과 `current.path`를 적는다. 탐침을 내면 `current.pending_probe`에 문제를 적고, 답을 받으면 `null`로 되돌린다.
 - 기록 중이라는 말을 학습자에게 하지 않는다.
 - 파일 일은 Read·Write·Edit로만 한다. `ls`·`cat`·`tail`·`grep`·`printf`·node·python 같은 Bash 명령을 쓰지 않는다(지도에서 찾는 것도 Read로 한다)(권한 창이 뜬다). `log.md`에 한 줄 더하기도 Edit로 한다. Bash는 HTML 여는 명령에만 쓴다.
