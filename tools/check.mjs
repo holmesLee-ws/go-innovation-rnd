@@ -15,6 +15,8 @@ const LEVELS = ["Explain", "Apply", "Evaluate", "Develop"];
 const FIELDS = ["선수", "핵심 질문", "목표", "만들어 볼 것", "국내 근거", "글로벌 비교"];
 const OPTIONAL = ["경계·연결"];
 const KEY = /\[([LG]\d+)\]/g;
+// 금액·비율·기한 숫자(R11). 조 번호(제N조)와 네 자리 연도는 빼고 본다.
+const NUMBER = /(?<![\d.제§¶])\d{1,3}(?:[.,]\d+)?\s*(?:원(?![가-힣])|천|만|억|배|퍼센트|개월|년|일|주(?![가-힣]))|\d\s*[%％]/u;
 
 function parseCurriculum(text) {
   const modules = new Map();
@@ -54,7 +56,7 @@ function parseCurriculum(text) {
       for (const k of keys) { used.add(k); if (!sources.has(k)) problems.push(`${id}: 출처 절에 없는 키 ${k}`); }
     }
     for (const [name, v] of Object.entries(fields)) {
-      if (/\d+(\.\d+)?\s*(%|퍼센트|억|만\s*원|원\b|개월|년간|일\s*이내)/.test(v.replace(KEY, ""))) problems.push(`${id}: 「${name}」에 금액·비율·기한 숫자(R11 — 커리큘럼에 적지 않는다)`);
+      if (NUMBER.test(v.replace(KEY, ""))) problems.push(`${id}: 「${name}」에 금액·비율·기한 숫자(R11 — 커리큘럼에 적지 않는다)`);
     }
     if (fields["목표"] && !LEVELS.some((l) => fields["목표"].startsWith(`${l} — `))) problems.push(`${id}: 목표 수준 형식 오류`);
     const prereq = !fields["선수"] || fields["선수"] === "없음" ? [] : fields["선수"].split(",").map((s) => s.trim());
@@ -82,8 +84,8 @@ function parseCurriculum(text) {
 }
 
 function findVisualAssets(files) {
-  const allowedJs = /^tools\/.*\.m?js$/;
-  return files.filter((f) => /\.(html?|css|svg|png|jpe?g|gif|webp|avif)$/i.test(f) || (/\.m?js$/i.test(f) && !allowedJs.test(f)));
+  const allowedJs = /^tools\/check\.mjs$/;
+  return files.filter((f) => /\.(html?|css|svg|png|jpe?g|gif|webp|avif|bmp|ico)$/i.test(f) || (/\.[cm]?js$/i.test(f) && !allowedJs.test(f)));
 }
 
 function findTemplateMarkup(name, text) {
@@ -114,7 +116,13 @@ function main() {
   const settings = JSON.parse(read(".claude/settings.json"));
   const allow = settings.permissions?.allow ?? [];
   const ruleText = [read("CLAUDE.md"), ...readdirSync(join(root, "tutor")).filter((f) => f.endsWith(".md")).map((f) => read(`tutor/${f}`))].join("\n");
-  const dirs = new Set([...ruleText.matchAll(/learner\/(studio|work|lab)\//g)].map((m) => m[1]));
+  const dirs = new Set([...ruleText.matchAll(/learner\/([\w-]+)\//g)].map((m) => m[1]));
+  for (const f of ["state.json", "log.md"]) if (!allow.includes(`Edit(/learner/${f})`)) errors.push(`허용 목록에 Edit(/learner/${f}) 없음`);
+  for (const c of ["Bash(open learner/studio/*.html)", "Bash(xdg-open learner/studio/*.html)", 'Bash(start "" learner/studio/*.html)', "PowerShell(Start-Process learner/studio/*.html)"]) {
+    if (!allow.includes(c)) errors.push(`허용 목록에 ${c} 없음`);
+    const cmd = c.replace(/^\w+\((.*) learner\/studio\/\*\.html\)$/, "$1");
+    if (!ruleText.includes(`${cmd} learner/studio/`)) errors.push(`tutor 규칙의 여는 명령에 「${cmd}」 없음`);
+  }
   for (const d of dirs) if (!allow.some((a) => a.startsWith(`Edit(/learner/${d}/`))) errors.push(`규칙이 learner/${d}/에 쓰라고 하는데 허용 목록에 없음`);
   for (const a of allow) { const m = a.match(/^Edit\(\/learner\/(\w+)\//); if (m && !dirs.has(m[1])) errors.push(`허용 목록의 learner/${m[1]}/를 규칙이 쓰지 않음`); }
   for (const dir of ["work", "studio"]) if (!dirs.has(dir)) errors.push(`규칙에 learner/${dir}/ 없음`);

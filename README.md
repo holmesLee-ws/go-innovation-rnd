@@ -8,7 +8,7 @@
 
 ## 시작하기
 
-준비물은 Git, [GitHub CLI](https://cli.github.com)(`gh`), Claude Code 또는 Claude Desktop입니다. 비공개 리포이므로 먼저 GitHub에서 보낸 초대를 수락하고, 터미널에서 `gh auth login`으로 로그인합니다. 다른 설치는 필요 없습니다.
+준비물은 Git, [GitHub CLI](https://cli.github.com)(`gh`), Claude Code 또는 Claude Desktop입니다. 비공개 리포이므로 먼저 GitHub에서 보낸 초대를 수락하고, 터미널에서 `gh auth login`으로 로그인합니다. node·python 같은 다른 설치는 필요 없습니다(`tools/`는 리포 관리자용 검사기라 학습에는 쓰지 않습니다).
 
 ```bash
 cd ~/Desktop
@@ -26,7 +26,7 @@ claude
 
 **Claude Desktop**
 
-Code 탭에서 데스크탑의 `go-innovation-rnd` 폴더를 선택합니다. Chat 탭이 아니라 Code 탭이어야 튜터 규칙이 적용됩니다.
+Code 탭에서 환경을 **Local**로 고른 뒤 데스크탑의 `go-innovation-rnd` 폴더를 선택합니다. Chat 탭이 아니라 Code 탭이어야 튜터 규칙이 적용됩니다. 첫 메시지를 보내기 전에 권한 모드를 확인하세요. 기본은 매번 묻는 모드이고, 전에 그 폴더에서 다른 모드를 골랐다면 그 모드가 남아 있을 수 있습니다.
 
 어느 쪽이든 「안녕」이라고 입력하면 시작합니다.
 
