@@ -331,7 +331,7 @@
 - [G14] 26 U.S.C. §41(연구 세액공제, qualified research는 (d))·§174A(국내 연구비 당기 공제, Pub. L. 119-21로 2025-07-04 개정). https://www.law.cornell.edu/uscode/text/26/41 , https://www.law.cornell.edu/uscode/text/26/174A (확인 2026-11-14)
 - [G15] 35 U.S.C. §102 — (b)(1) 발명자 공개 예외. https://www.law.cornell.edu/uscode/text/35/102 (확인 2026-11-14)
 - [G16] Gesetz über Arbeitnehmererfindungen(ArbnErfG) — §5(신고), §6(청구·청구 의제), §9(보상). https://www.gesetze-im-internet.de/arbnerfg/ (확인 2026-11-14)
-- [G17] 日本 特許法 第35条(職務発明) — 제3항 원시귀속 선택, 제4항 相当の利益. https://laws.e-gov.go.jp/law/334AC0000000121 (확인 2026-11-14)
+- [G17] 日本 特許法 第35条(職務発明) — 제3항 원시귀속 선택, 제4항 相当の利益. https://laws.e-gov.go.jp/law/334AC0000000121 (화면은 스크립트로 그려져 WebFetch로 비어 보인다 — 조문은 e-Gov 법령 API https://laws.e-gov.go.jp/api/1/articles;lawId=334AC0000000121;article=35 로 읽는다, 확인 2026-11-14)
 - [G18] UK HMRC, Research and Development (R&D) tax relief: the merged scheme and Enhanced R&D Intensive Support(2024-04-01 이후 시작 회계기간). https://www.gov.uk/guidance/research-and-development-rd-tax-relief-the-merged-scheme-and-enhanced-rd-intensive-support (확인 2026-11-14)
 - [G19] EU Horizon Europe Unit Model Grant Agreement V1.3(2025-12-15) — Article 16, Annex 5(결과의 소유·보호·활용). https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/agr-contr/unit-mga_he_en.pdf (확인 2026-11-14)
 - [G20] WIPO Patent Cooperation Treaty(PCT) 체계. https://www.wipo.int/en/web/pct-system (확인 2026-11-14)
