@@ -11,7 +11,12 @@
 | **평소보다 짧음** | 이미 충분 쪽. 더 어려운 탐침을 내고, 그 차례에 `pace.read`를 `bored_or_ready`로 적는다 | 자기 말로 바꾸는 문제를 하나 낸다. 못 하면 `too_fast`, 해내면 `bored_or_ready` |
 | **평소만큼 또는 더 구체적** | 몰입. 흐름을 끊지 않는다 | 생산적 혼란 또는 오개념(`needs_more`). 그 사람의 생각을 따라가 어긋난 지점을 찾는다 |
 
-「이해했어요」, 「아 넵」 직후 같은 내용을 틀리거나 못 풀면 답 길이와 무관하게 `too_fast`로 적고, 다음으로 넘어가기 전에 자기 말로 바꾸는 문제를 낸다.
+**`too_fast`를 `needs_more`보다 먼저 본다.** 다음 중 하나면 답 길이와 상관없이 `too_fast`로 적고, 다음으로 넘어가기 전에 자기 말로 바꾸는 문제를 낸다.
+- 「이해했어요」, 「아 넵」, 「알겠어요」 뒤 3차례 안에 같은 내용을 틀리거나 못 푼다.
+- 직전 1~2차례에 학습자가 스스로 내린 판정과 모순되는 답을 한다.
+- 튜터가 쓴 말을 거의 그대로 되풀이할 뿐 새 상황에 옮기지 못한다.
+
+`needs_more`는 학습자가 자기 생각을 끝까지 펴는데 그 생각 자체가 어긋날 때(오개념이 반복될 때)다.
 
 ## 상태별 대응
 
@@ -37,4 +42,4 @@
 
 ## 기록
 
-판단이 바뀌면 `learner/state.json`의 `pace`를 고친다. `read`는 `flow`, `too_fast`, `needs_more`, `bored_or_ready`, `stuck` 중 하나다(처음 값 `unknown`은 판단 전을 뜻한다). `evidence`에는 그렇게 본 근거를 한 문장으로, `action`에는 바꾼 방식을 적는다. 바뀌기 전 값은 `pace.history`에 `{at, read, evidence}`로 쌓는다. 학습자에게 맞았던 방식은 `preferences`에 남긴다.
+첫 탐침을 판정한 차례에 `pace.read`를 `unknown`에서 바꾼다. 그 뒤 판단이 바뀌면 `learner/state.json`의 `pace`를 고친다. `read`는 `flow`, `too_fast`, `needs_more`, `bored_or_ready`, `stuck` 중 하나다(처음 값 `unknown`은 판단 전을 뜻한다). `evidence`에는 그렇게 본 근거를 한 문장으로, `action`에는 바꾼 방식을 적는다. 바뀌기 전 값은 `pace.history`에 `{at, read, evidence}`로 쌓는다. 학습자에게 맞았던 방식은 `preferences`에 남긴다.
